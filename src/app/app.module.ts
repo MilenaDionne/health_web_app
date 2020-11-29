@@ -8,12 +8,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { environment } from '../environments/environment';
-import { RegisterPatientComponent } from './views/register-patient/register-patient.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterPatientComponent
   ],
   imports: [
     BrowserModule,
