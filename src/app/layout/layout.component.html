@@ -1,0 +1,11 @@
+<div class="app-container">
+  <app-header class="app-header"
+              *ngIf="authState | async"
+              [authState]="authState"
+              [user]="user"
+              (logout)="onLogout()"
+  ></app-header>
+  <div [ngClass]="{ 'not-authenticated': !(authState |async), 'app-content': true }">
+    <ng-content></ng-content>
+  </div>
+</div>

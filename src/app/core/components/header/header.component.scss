@@ -1,0 +1,29 @@
+@use 'src/styles/theme';
+
+mat-toolbar-row {
+  height: 100%;
+
+  }
+
+.header-container {
+  height: 100%;
+  min-height: unset;
+}
+
+.space{
+  flex: 1 1 auto;
+}
+
+.menu-button {
+  color: theme.$white-color;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.logout-button {
+  border-radius: 10px;
+  margin: 0 1rem 0 0;
+  padding: 0 .5rem;
+  text-align: right;
+  width: 50%;
+}

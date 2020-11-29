@@ -1,16 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
+import { environment } from '../environments/environment';
+import { RegisterPatientComponent } from './views/register-patient/register-patient.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegisterPatientComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

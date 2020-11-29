@@ -1,0 +1,14 @@
+<mat-toolbar class="header-container" color="primary">
+    <mat-toolbar-row>
+      <span>PMS</span>
+      <a
+        class="menu-button"
+        *ngFor="let nav of sideNavButtons"
+        (click)="onNavigateOut()"
+        [routerLink]="['/' + nav.path]">
+        {{ nav.label | titlecase }}
+      </a>
+      <span class="space"></span>
+      <button mat-raised-button (click)="onLogout()" color="warn"> Logout <mat-icon>power_settings_new</mat-icon> </button>
+    </mat-toolbar-row>
+</mat-toolbar>

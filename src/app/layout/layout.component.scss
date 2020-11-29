@@ -1,0 +1,28 @@
+@use 'src/styles/theme';
+
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .app-content {
+    background-color: theme.$white-color;
+    flex: 1;
+    overflow: auto;
+    padding: 2rem;
+  }
+
+  .app-content.not-authenticated {
+    border-radius: unset;
+  }
+
+  .app-header {
+    height: theme.$header-height;
+    background-color: theme.$primary-color;
+  }
+
+}
+
+
+
