@@ -26,6 +26,11 @@ const routes: Routes = [
     loadChildren: () => import('./views/register-patient/register-patient.module').then(m => m.RegisterPatientModule),
     ...canActivate(redirectUnauthorizedToLogin),
   },
+  {
+    path: 'updateFile',
+    loadChildren: () => import('./views/update-patient/update-patient.module').then(m => m.UpdatePatientModule),
+    ...canActivate(redirectUnauthorizedToLogin),
+  }
 ];
 
 @NgModule({
