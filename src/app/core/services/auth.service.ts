@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UserCredential } from '@firebase/auth-types';
 
-import { User, UserRegistration } from 'src/app/shared/models/user.model';
+import { User, MedicalStaff } from 'src/app/shared/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,20 +42,20 @@ export class AuthService {
     return this.afAuth.signOut();
   }
 
-  public async register(userRegistration: UserRegistration): Promise<User | void> {
-    const {displayName, email, firstName, fullName, lastName, password} = userRegistration;
-    return this.afAuth.createUserWithEmailAndPassword(email, password)
+  public async register(medicalStaff: MedicalStaff, password: string): Promise<User | void> {
+    const {employeeNumber, email, firstName, lastName, role} = medicalStaff;
+    return this.afAuth.createUserWithEmailAndPassword(email, password) // firebase auth
       .then(async (credentials) => {
-        await credentials.user.updateProfile({displayName});
-        const newUser: User = {
-          displayName,
+        const newUser: MedicalStaff = {
+          employeeNumber,
           email: credentials.user.email,
           firstName,
-          fullName,
           lastName,
+          role,
           uid: credentials.user.uid,
         };
-        await this.afs.doc<User>(`users/${newUser.uid}`).set(newUser);
+        console.log(newUser.role);
+        await this.afs.doc<MedicalStaff>(`${newUser.role.toLowerCase()}s/${newUser.uid}`).set(newUser); // push to firestore
       });
   }
 }

@@ -43,12 +43,12 @@ export const AuthFormFields: AuthField[] = [
     validators: ['required', 'email'],
   },
   {
-    controlName: 'username',
+    controlName: 'employeeNumber',
     isOnlyForRegister: true,
-    label: 'Username',
-    type: 'text',
+    label: 'Employee Number',
+    type: 'number',
     defaultValue: null,
-    placeholder: 'johnsmith',
+    placeholder: '300034572',
     icon: 'account_box',
     validators: ['required'],
   },
@@ -60,6 +60,16 @@ export const AuthFormFields: AuthField[] = [
     defaultValue: null,
     placeholder: '********',
     icon: 'lock',
+    validators: ['required'],
+  },
+  {
+    controlName: 'role',
+    isOnlyForRegister: true,
+    label: 'role',
+    type: 'string',
+    defaultValue: null,
+    placeholder: '********',
+    icon: 'local_hospital',
     validators: ['required'],
   }
 ];
