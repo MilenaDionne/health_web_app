@@ -1,6 +1,13 @@
-
-<body>
-  <div *ngIf="currentPatient != null">
-    {{currentPatient.firstName}}  {{currentPatient.lastName}} {{currentPatient.id}}
+<form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+  <div class="mat-form-field">
+    <label for="firstName">First Name</label>
+    <input type="text" class="mat-form-field" id="firstName" formControlName="firstName" required
+    [value]="enteredFirstName">
   </div>
-</body>
+  <button *ngIf="!edited" (click)="editForm()">Edit</button>
+  <button *ngIf="edited" (click)="saveForm()">Save</button>
+</form>
+
+
+
+
