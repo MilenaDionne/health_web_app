@@ -1,11 +1,37 @@
 <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
-  <div class="mat-form-field">
-    <label for="firstName">First Name</label>
-    <input type="text" class="mat-form-field" id="firstName" formControlName="firstName" required
-    [value]="enteredFirstName">
+  <div class = "name">
+    <div class="name-items">
+      <label for="firstName">First Name</label>
+      <input type="text" class="mat-form-field" id="firstName" formControlName="firstName" required
+             [value]="enteredFirstName">
+    </div>
+    <div class="name-items">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="mat-form-field" id="lastName" formControlName="lastName" required
+             [value]="enteredLastName">
+    </div>
   </div>
-  <button *ngIf="!edited" (click)="editForm()">Edit</button>
-  <button *ngIf="edited" (click)="saveForm()">Save</button>
+  <div class="phone">
+    <label for="phoneNumber">Phone Number</label>
+    <input type="tel" class="mat-form-field" id="phoneNumber" formControlName="phoneNumber" required
+           [value]="patientForm.controls.phoneNumber">
+    <div *ngIf="enteredPhoneNumber.invalid" class="error-msg">
+      <p>Error: Phone must of the form 12345678901. Use numbers only.
+      </p>
+    </div>
+  </div>
+  <div class="email">
+    <label for="email">Email</label>
+    <input type="email" class="mat-form-field" id="email" formControlName="email" required
+           [value]="patientForm.controls.email">
+    <div *ngIf="enteredEmail.invalid" class="error-msg">
+      <p>Error: Email must of the form example@domain.com</p>
+    </div>
+  </div>
+  <button *ngIf="!edited" (click)="editForm()" class="button-edit">Edit</button>
+  <button *ngIf="edited" (click)="saveForm()" [disabled]="patientForm.invalid"
+          [ngClass]="!patientForm.invalid ? 'save-valid':'save-invalid'"
+  >Save</button>
 </form>
 
 
