@@ -13,11 +13,10 @@ import { User, MedicalStaff } from 'src/app/shared/models/user.model';
 export class AuthService {
   readonly authState: Observable<User>;
   readonly user: Observable<User>;
+  userinfo: string;
 
-  constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-  ) {
+
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.authState = this.afAuth.authState;
     this.user = this.afAuth.authState.pipe(
       switchMap((user: User) => {
@@ -30,13 +29,23 @@ export class AuthService {
     return this.user;
   }
 
+  getInfo(): string{
+    return this.userinfo;
+  }
+
+  public setInfo(email: string): void {
+    this.userinfo = email;
+  }
+
   get getAuthState(): Observable<User> {
     return this.authState;
   }
 
   public login(email: string, password: string): Promise<UserCredential> {
+    this.setInfo(email);
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
+
 
   public logout(): Promise<void> {
     return this.afAuth.signOut();
@@ -58,4 +67,6 @@ export class AuthService {
         await this.afs.doc<MedicalStaff>(`${newUser.role.toLowerCase()}s/${newUser.uid}`).set(newUser); // push to firestore
       });
   }
+
+
 }

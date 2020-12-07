@@ -1,17 +1,43 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {PatientFile} from '../../shared/models/patient-file.model';
+import {Patient} from '../../shared/models/patient.model';
 import {Observable} from 'rxjs';
+import {UserService} from './user.service';
 import firebase from 'firebase';
+import {FirestoreService} from '../../firestore.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
+  patients = [
+    new Patient('1', 'John', 'Doe', 123456789, '15 juin 1999', 'male', 'married'),
+  ];
+
+  currentPatient: Patient = null;
+
+  msgStyle = {
+    color: null,
+    'background-color': 'white',
+    'font-size': '150%',
+  };
+  message: string;
+  hideMsg = true;
 
   constructor(
-    private firestore: AngularFirestore,
-  ) { }
+    private firestore: AngularFirestore, private userService: UserService, private store: FirestoreService) { }
+
+  showMessage(type: string, msg: string): void {
+    this.msgStyle.color = type === 'error' ? 'red' : 'blue';
+    this.message = msg;
+    this.hideMsg = false;
+    setTimeout(
+      () => {
+        this.hideMsg = true;
+      }, 2500
+    );
+  }
 
   getPatientFiles(): Observable<DocumentChangeAction<unknown>[]>{
     return this.firestore.collection('patients').snapshotChanges();
@@ -21,6 +47,30 @@ export class PatientService {
     return this.firestore.collection('patients').doc(docId).valueChanges();
   }
 
+  addPatient(p: Patient): void{
+    this.patients.push(p);
+    this.select(p);
+
+    if (this.currentPatient.id === null){
+      this.store.createUser(this.currentPatient).then(
+        docRef => {
+        this.currentPatient.id = docRef.id;
+        this.showMessage('info', 'The address entry was successfully saved');
+        }
+      ).catch(_ =>
+      this.showMessage('error', 'Error unable to save the address entry'));
+    } else {
+      this.store.updateUser(this.currentPatient).then(_ =>
+      this.showMessage('info', 'The addres entry was successfully updated'))
+        .catch(_ =>
+        this.showMessage('error', 'Error unable to update the address entry'));
+    }
+  }
+
+  select(patient: Patient): void {
+    this.currentPatient = patient;
+    this.userService.selectionChanged(patient);
+  }
 
   // deletePatientFile(){
   //
@@ -33,4 +83,6 @@ export class PatientService {
       alert('Save unsuccessful' + error);
     });
   }
+
+
 }
