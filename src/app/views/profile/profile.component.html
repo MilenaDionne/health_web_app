@@ -2,23 +2,23 @@
 <div class="container">
   <div class="main-body">
     <div class="card">
-        <img src="assets/img/theme/profile-cover.jpg" alt="Users-image" class="mat-radio-inner-circle" width="222">
-        <div class="mt-3">
-          <h4>
-            <div *ngFor='let i of myArray'>
-              <div *ngIf="i.email == email">{{i.firstName}} {{i.lastName}}</div>
-            </div>
-          </h4>
-          <div class="text-secondarymb-1">
-            <div *ngFor='let i of myArray'>
-              <div *ngIf="i.email == email">{{i.role}}</div>
-            </div>
+      <img src="assets/img/theme/profile-cover.jpg" alt="Users-image" class="mat-radio-inner-circle" width="222">
+      <div class="mt-3">
+        <h4>
+          <div *ngFor='let i of myArray'>
+            <div *ngIf="i.uid == user.uid">{{i.role}}</div>
           </div>
-          <div class="text-mutedfont-size-sm">
-            <div *ngFor='let i of myArray'>
-              <div *ngIf="i.email == email">{{i.employeeNumber}}</div>
-            </div>
+        </h4>
+        <div class="text-secondarymb-1">
+          <div *ngFor='let i of myArray'>
+            <div *ngIf="i.uid == user.uid">{{i.role}}</div>
           </div>
+        </div>
+        <div class="text-mutedfont-size-sm">
+          <div *ngFor='let i of myArray'>
+            <div *ngIf="i.uid == user.uid">{{i.employeeNumber}}</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="card2">
@@ -28,7 +28,7 @@
         </div>
         <div class="col-sm-9 text-secondary">
           <div *ngFor='let i of myArray'>
-            <div *ngIf="i.email == email">{{i.firstName}} {{i.lastName}}</div>
+            <div *ngIf="i.uid == user.uid">{{i.role}}</div>
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
           <h6 class="mb-0">Email</h6>
         </div>
         <div class="col-sm-9 text-secondary">
-          {{email}}
+          {{user.email}}
         </div>
       </div>
       <hr>
@@ -48,7 +48,7 @@
         </div>
         <div class="col-sm-9 text-secondary">
           <div *ngFor='let i of myArray'>
-            <div *ngIf="i.email == email">{{i.employeeNumber}}</div>
+            <div *ngIf="i.uid == user.uid">{{i.employeeNumber}}</div>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="col-sm-9 text-secondary">
           <div *ngFor='let i of myArray'>
-            <div *ngIf="i.email == email">{{i.role}}</div>
+            <div *ngIf="i.uid == user.uid">{{i.role}}</div>
           </div>
         </div>
       </div>
