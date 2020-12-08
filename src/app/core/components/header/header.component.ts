@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
     { label: 'home', path: '' },
     { label: 'profile', path: 'profile' },
     { label: 'register Patient', path: 'registerPatient' },
+    { label: 'admit Patient', path: 'admitPatient' },
   ];
 
   constructor() { }

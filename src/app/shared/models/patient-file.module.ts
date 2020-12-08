@@ -4,4 +4,5 @@ export interface PatientFile{
   lastName: string;
   email?: string;
   phoneNumber?: string;
+  divisionId?: string;
 }

@@ -30,7 +30,7 @@ export class PatientService {
   //
   // }
   //
-  // updatePatientFile(){
-  //
-  // }
+  updatePatientFile(docId: string, patId: string, action: string){
+  
+  }
 }

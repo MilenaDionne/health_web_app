@@ -27,6 +27,11 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
   },
   {
+    path: 'admitPatient',
+    loadChildren: () => import('./views/admit-patient/admit-patient.module').then(m => m.AdmitPatientModule),
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
     path: 'updateFile',
     loadChildren: () => import('./views/update-patient/update-patient.module').then(m => m.UpdatePatientModule),
     ...canActivate(redirectUnauthorizedToLogin),

@@ -1,0 +1,57 @@
+<div>
+    <h2>Admit Patient</h2>
+    <div>
+        <h4>Select Patient</h4>
+        <mat-form-field appearance="fill">
+            <mat-label>Patients</mat-label>
+            <mat-select [(ngModel)]="currentPatient" name="patient" required>
+                <mat-option *ngFor="let patient of unassignedPatients" [value]="patient.id">
+                {{patient.firstName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <p> Selected patient: {{currentPatient}} </p>
+
+        <h4>Select Division</h4>
+        <mat-form-field appearance="fill">
+        <mat-label>Divisions</mat-label>
+        <mat-select [(ngModel)]="currentDivision" name="division" required>
+            <mat-option *ngFor="let division of divisions" [value]="division.id">
+            {{division.name}}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+        <p> Selected division: {{currentDivision}} </p>
+    </div>
+    <button (click)="admitButton()" [disabled]="this.capacity == true">Request Admission</button>
+    <button (click)="admitListButton()" [disabled]="this.capacity == false">Request List Admission</button>
+</div>
+
+<div>
+    <h2>Remove Patient</h2>
+    <h4>Select Division First</h4>
+    <div>
+        <h4>Select Patient</h4>
+        <mat-form-field appearance="fill">
+            <mat-label>Patients</mat-label>
+            <mat-select [(ngModel)]="currentPatientRE" name="patient" required>
+                <mat-option *ngFor="let patient of divisionPatients" [value]="patient.id">
+                {{patient.firstName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <p> Selected patient: {{currentPatientRE}} </p>
+
+        <h4>Select Division</h4>
+        <mat-form-field appearance="fill">
+        <mat-label>Divisions</mat-label>
+        <mat-select [(ngModel)]="currentDivisionRE" name="division" required>
+            <mat-option *ngFor="let division of divisions" (click)="updatePatients()" [value]="division.id">
+            {{division.name}}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+        <p> Selected division: {{currentDivisionRE}} </p>
+    </div>
+    <button (click)="removeButton()" >Request Removal</button>
+</div>
