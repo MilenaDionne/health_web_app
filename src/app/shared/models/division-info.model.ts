@@ -1,6 +1,6 @@
 export interface DivisionInfo{
   id: string;
-  divisionName: string;
+  name: string;
   totalCapacity: string;
   currentCapacity: string;
   patients: string[];
