@@ -11,9 +11,10 @@ export class Patient {
   maritalStatus: string;
   externalDoctorId?: string;
   doctorId?: string;
+  prescription?: string;
 
   constructor(id: string, firstName: string, lastName: string, socialInsurance: number, birthDate: string,
-              gender: string, maritalStatus: string, externalDoctorId?: string, doctorId?: string) {
+              gender: string, maritalStatus: string, externalDoctorId?: string, doctorId?: string, prescription?: string) {
     this.id = null;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -23,5 +24,6 @@ export class Patient {
     this.maritalStatus = maritalStatus;
     this.externalDoctorId = externalDoctorId;
     this.doctorId = doctorId;
+    this.prescription = prescription;
   }
 }

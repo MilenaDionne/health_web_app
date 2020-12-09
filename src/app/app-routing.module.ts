@@ -27,7 +27,7 @@ const routes: Routes = [
     path: 'registerPatient',
     loadChildren: () => import('./views/register-patient/register-patient.module').then(m => m.RegisterPatientModule),
     ...canActivate(redirectUnauthorizedToLogin),
-    canActivate: [DoctorUserGuard]
+    //canActivate: [DoctorUserGuard]
   },
   {
     path: 'admitPatient',
@@ -49,7 +49,13 @@ const routes: Routes = [
       path: 'consultPatient',
       loadChildren: () => import('./views/consult-patient/consult-patient.module').then(m => m.ConsultPatientModule),
       ...canActivate(redirectUnauthorizedToLogin)
-    }
+    },
+
+  {
+    path: 'prescription',
+    loadChildren: () => import('./views/prescription/prescription.module').then(m => m.PrescriptionModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  }
 ];
 
 @NgModule({
