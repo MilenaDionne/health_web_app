@@ -29,7 +29,8 @@ export class RegisterPatientComponent implements OnInit {
     gender: ['', [Validators.required, genderValidator]],
     maritalStatus: ['', [Validators.required]],
     externalDoctorId: [''],
-    doctorId: ['']
+    doctorId: [''],
+    prescription: ['']
   });
 
   get id(): AbstractControl {return this.patientFile.get('id'); }
@@ -53,7 +54,8 @@ export class RegisterPatientComponent implements OnInit {
       this.patientFile.value.gender,
       this.patientFile.value.maritalStatus,
       this.patientFile.value.externalDoctorId,
-      this.patientFile.value.doctorId);
+      this.patientFile.value.doctorId,
+      this.patientFile.value.prescription);
     this.patientService.addPatient(patient);
     this.patientFile.reset();
   }
