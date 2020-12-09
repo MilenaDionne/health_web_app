@@ -1,4 +1,19 @@
+<html>
+<head>
+  <style>
+    body {
+      background-image: url('assets/img/theme/doctors_new.jpg') ;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+
 <h2>{{ (user | async)?.firstName | titlecase }}</h2>
 <h2>{{ (user | async)?.role | titlecase }}</h2>
 <h2>{{ (user | async)?.email  | titlecase }}</h2>
+</body>
+</html>
 
