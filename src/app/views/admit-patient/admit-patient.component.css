@@ -1,0 +1,13 @@
+.admit{
+    width: 50%;
+    float: left;
+    padding-left: 10;
+    text-align: center;
+}
+
+.remove{
+    width: 50%;
+    float: right;
+    padding-right: 10;
+    text-align: center;
+}

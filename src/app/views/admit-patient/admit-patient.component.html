@@ -1,4 +1,4 @@
-<div>
+<div class="admit">
     <h2>Admit Patient</h2>
     <div>
         <h4>Select Patient</h4>
@@ -6,7 +6,7 @@
             <mat-label>Patients</mat-label>
             <mat-select [(ngModel)]="currentPatient" [disabled]="this.noUnassignedPatients" name="patient" required>
                 <mat-option *ngFor="let patient of unassignedPatients" [value]="patient.id">
-                {{patient.firstName}}
+                {{patient.firstName+" "+patient.lastName}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -21,11 +21,17 @@
         </mat-select>
         </mat-form-field>
     </div>
+    <div *ngIf="this.capacity == true" class="alert-msg">
+        <p>Note: Maximum limit for patients reached in this division, please add patients to waiting list.</p>
+    </div>
+    <div *ngIf="this.noUnassignedPatients" class="alert-msg">
+        <p>Note: There are currently no unassigned patients.</p>
+    </div>
     <button (click)="admitButton()" [disabled]="this.capacity == true || this.noUnassignedPatients">Request Admission</button>
     <button (click)="admitListButton()" [disabled]="this.capacity == false || this.noUnassignedPatients">Request List Admission</button>
 </div>
 
-<div>
+<div class="remove">
     <h2>Remove Patient</h2>
     <p>Please Select Division First</p>
     <div>
@@ -34,7 +40,7 @@
             <mat-label>Patients</mat-label>
             <mat-select [(ngModel)]="currentPatientRE" [disabled]="this.noPatients" name="patient" required>
                 <mat-option *ngFor="let patient of divisionPatients" [value]="patient.id">
-                {{patient.firstName}}
+                {{patient.firstName+" "+patient.lastName}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -48,6 +54,9 @@
             </mat-option>
         </mat-select>
         </mat-form-field>
+    </div>
+    <div *ngIf="this.noPatients" class="alert-msg">
+        <p>Note: There are currently no unassigned patients.</p>
     </div>
     <button (click)="removeButton()" [disabled]="this.noPatients">Request Removal</button>
 </div>
