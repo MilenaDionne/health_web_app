@@ -5,7 +5,7 @@ import {Patient} from '../../shared/models/patient.model';
 import {Observable} from 'rxjs';
 import {UserService} from './user.service';
 import firebase from 'firebase';
-import {FirestoreService} from '../../firestore.service';
+import {FirestoreService} from './firestore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,11 +40,11 @@ export class PatientService {
   }
 
   getPatientFiles(): Observable<DocumentChangeAction<unknown>[]>{
-    return this.firestore.collection('patients').snapshotChanges();
+    return this.store.getPatientFiles();
   }
 
   getPatientFile(docId: string): Observable<unknown>{
-    return this.firestore.collection('patients').doc(docId).valueChanges();
+    return this.store.getPatientFile(docId);
   }
 
   addPatient(p: Patient): void{
@@ -52,7 +52,7 @@ export class PatientService {
     this.select(p);
 
     if (this.currentPatient.id === null){
-      this.store.createUser(this.currentPatient).then(
+      this.store.creeatePatient(this.currentPatient).then(
         docRef => {
         this.currentPatient.id = docRef.id;
         this.showMessage('info', 'The address entry was successfully saved');
@@ -60,7 +60,7 @@ export class PatientService {
       ).catch(_ =>
       this.showMessage('error', 'Error unable to save the address entry'));
     } else {
-      this.store.updateUser(this.currentPatient).then(_ =>
+      this.store.updatePatient(this.currentPatient).then(_ =>
       this.showMessage('info', 'The addres entry was successfully updated'))
         .catch(_ =>
         this.showMessage('error', 'Error unable to update the address entry'));
@@ -77,11 +77,7 @@ export class PatientService {
   // }
   //
   updatePatientFile(patientFile: PatientFile): void{
-    this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
-      alert('file updated successfully!');
-    }).catch(error => {
-      alert('Save unsuccessful' + error);
-    });
+    this.store.updatePatientFile(patientFile);
   }
   updatePatient(patientFile: Patient): void{
     this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
@@ -92,11 +88,7 @@ export class PatientService {
   }
 
   addPrescription(patientFile: PatientFile): void{
-    this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
-      alert('file updated successfully!');
-    }).catch(error => {
-      alert('Save unsuccessful' + error);
-    });
+    this.store.addPrescription(patientFile);
   }
 
 
