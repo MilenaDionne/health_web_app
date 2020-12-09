@@ -5,7 +5,7 @@ import {Patient} from '../../shared/models/patient.model';
 import {Observable} from 'rxjs';
 import {UserService} from './user.service';
 import firebase from 'firebase';
-import {FirestoreService} from '../../firestore.service';
+import {FirestoreService} from './firestore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +52,7 @@ export class PatientService {
     this.select(p);
 
     if (this.currentPatient.id === null){
-      this.store.createUser(this.currentPatient).then(
+      this.store.creeatePatient(this.currentPatient).then(
         docRef => {
         this.currentPatient.id = docRef.id;
         this.showMessage('info', 'The address entry was successfully saved');
@@ -60,7 +60,7 @@ export class PatientService {
       ).catch(_ =>
       this.showMessage('error', 'Error unable to save the address entry'));
     } else {
-      this.store.updateUser(this.currentPatient).then(_ =>
+      this.store.updatePatient(this.currentPatient).then(_ =>
       this.showMessage('info', 'The addres entry was successfully updated'))
         .catch(_ =>
         this.showMessage('error', 'Error unable to update the address entry'));
