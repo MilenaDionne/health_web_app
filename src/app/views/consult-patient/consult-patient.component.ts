@@ -25,7 +25,7 @@ export class ConsultPatientComponent implements OnInit {
             this.activePatient = data;
           }
           else{
-            alert('No division found with that Id');
+            alert('No patient found with that Id');
           }
         }
         catch (err){
@@ -33,4 +33,5 @@ export class ConsultPatientComponent implements OnInit {
         }
       });
     }
+
 }

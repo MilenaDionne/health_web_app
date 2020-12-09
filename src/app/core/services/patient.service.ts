@@ -83,6 +83,21 @@ export class PatientService {
       alert('Save unsuccessful' + error);
     });
   }
+  updatePatient(patientFile: Patient): void{
+    this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
+      alert('file updated successfully!');
+    }).catch(error => {
+      alert('Save unsuccessful' + error);
+    });
+  }
+
+  addPrescription(patientFile: PatientFile): void{
+    this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
+      alert('file updated successfully!');
+    }).catch(error => {
+      alert('Save unsuccessful' + error);
+    });
+  }
 
 
 }

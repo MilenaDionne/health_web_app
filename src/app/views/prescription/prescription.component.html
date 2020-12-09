@@ -1,0 +1,62 @@
+<h1>Prescriptions</h1>
+<div class="showPatient">
+  <div class="main-body">
+    <h4>Select Patient</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Patients</mat-label>
+      <mat-select [(ngModel)]="currentId" [disabled]="this.noUnassignedPatients" name="patient" required>
+        <mat-option *ngFor="let patient of unassignedPatients" [value]="patient.id">
+          {{patient.firstName+" "+patient.lastName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <button (click)="getPatientInformation(currentId)" [disabled]="currentId == ''"
+            [ngClass]="currentId == '' ? 'search-invalid':'search-valid'">Show patient info</button>
+    <div class="patient-display" *ngIf="currentPatient != null">
+      <div class="patient-property">
+        <h4>First Name</h4>
+        <p>{{currentPatient.firstName}}</p>
+      </div>
+      <div class="patient-property">
+        <h4>Last Name</h4>
+        <p>{{currentPatient.lastName}}</p>
+      </div>
+      <div class="patient-property">
+        <h4>Date Of Birth</h4>
+        <p>{{currentPatient.birthDate}}</p>
+      </div>
+      <div class="patient-property">
+        <h4>Gender</h4>
+        <p>{{currentPatient.gender}}</p>
+      </div>
+      <div class="patient-property">
+        <h4>Marital Status</h4>
+        <p>{{currentPatient.maritalStatus}}</p>
+      </div>
+      <div class="patient-property">
+        <h4>Prescription</h4>
+        <p>{{currentPatient.prescription}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="addPrescription">
+  <h2>Add Prescription</h2>
+  <form [formGroup]="patientForm" (ngSubmit)="enteredId">
+    <div class="name-items">
+      <div>current patient id is: {{currentId}}</div>
+      <label for="prescription">prescription</label>
+      <input type="text" class="mat-form-field" id="prescription" formControlName="prescription" required
+             [value]="enteredPrescription">
+      <button (click)="savePrescription()" [ngClass]="!patientForm.invalid ? 'save-valid':'save-invalid'">Add</button>
+    </div>
+
+  </form>
+</div>
+
+
+
+

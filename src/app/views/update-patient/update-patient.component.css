@@ -1,11 +1,12 @@
-.name{
+.form-entry {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(500px,1fr) minmax(500px, 1fr);
+  grid-template-rows: 25px 25px 25px;
   column-gap: 50px;
   margin-bottom: 25px;
 }
 
-.name-items{
+.form-items{
   display: grid;
   grid-template-columns: 1fr;
 }

@@ -1,31 +1,58 @@
 <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
-  <div class = "name">
-    <div class="name-items">
+  <div class = "form-entry">
+    <div class="form-items">
       <label for="firstName">First Name</label>
       <input type="text" class="mat-form-field" id="firstName" formControlName="firstName" required
              [value]="enteredFirstName">
+      <p class="error-msg" *ngIf="patientForm.controls.firstName.invalid">*First Name is required</p>
     </div>
-    <div class="name-items">
+    <div class="form-items">
       <label for="lastName">Last Name</label>
       <input type="text" class="mat-form-field" id="lastName" formControlName="lastName" required
              [value]="enteredLastName">
+      <p class="error-msg" *ngIf="patientForm.controls.lastName.invalid">*Last Name is required</p>
     </div>
   </div>
-  <div class="phone">
-    <label for="phoneNumber">Phone Number</label>
-    <input type="tel" class="mat-form-field" id="phoneNumber" formControlName="phoneNumber" required
-           [value]="patientForm.controls.phoneNumber">
-    <div *ngIf="enteredPhoneNumber.invalid" class="error-msg">
-      <p>Error: Phone must of the form 12345678901. Use numbers only.
-      </p>
+  <div class="form-entry">
+    <div class="form-items">
+      <label for="birthDate">Birth Date</label>
+      <input type="text" class="mat-form-field" id="birthDate" formControlName="birthDate" required
+             [value]="enteredBirthDate">
+      <p class="error-msg" *ngIf="patientForm.controls.birthDate.invalid">*Birthdate is required</p>
+    </div>
+    <div class="form-items">
+      <label for="gender">Gender</label>
+      <input type="text" class="mat-form-field" id="gender" formControlName="gender" required
+             [value]="enteredGender">
+      <p class="error-msg" *ngIf="patientForm.controls.gender.invalid">*Gender is required
+      and must be either male or female</p>
     </div>
   </div>
-  <div class="email">
-    <label for="email">Email</label>
-    <input type="email" class="mat-form-field" id="email" formControlName="email" required
-           [value]="patientForm.controls.email">
-    <div *ngIf="enteredEmail.invalid" class="error-msg">
-      <p>Error: Email must of the form example@domain.com</p>
+  <div class="form-entry">
+    <div class="form-items">
+      <label for="socialInsurance">Social Insurance</label>
+      <input type="text" class="mat-form-field" id="socialInsurance" formControlName="socialInsurance" required
+             [value]="enteredSocialInsurance">
+      <p class="error-msg" *ngIf="patientForm.controls.socialInsurance.invalid">*Social Insurance Number
+      is required and must be of the form: 123456789</p>
+    </div>
+    <div class="form-items">
+      <label for="maritalStatus">Marital Status</label>
+      <input type="text" class="mat-form-field" id="maritalStatus" formControlName="maritalStatus" required
+             [value]="enteredMartialStatus">
+      <p class="error-msg" *ngIf="patientForm.controls.maritalStatus.invalid">*Marital Status is required</p>
+    </div>
+  </div>
+  <div class="form-entry">
+    <div class="form-items">
+      <label for="externalDoctorId">External Doctor Id</label>
+      <input type="text" class="mat-form-field" id="externalDoctorId" formControlName="externalDoctorId"
+             [value]="enteredExternalDoctorId">
+    </div>
+    <div class="form-items">
+      <label for="doctorId">Doctor Id</label>
+      <input type="text" class="mat-form-field" id="doctorId" formControlName="doctorId"
+             [value]="enteredDoctorId">
     </div>
   </div>
   <button *ngIf="!edited" (click)="editForm()" class="button-edit">Edit</button>

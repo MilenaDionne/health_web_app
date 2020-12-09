@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PatientService} from '../../core/services/patient.service';
 import {PatientFile} from '../../shared/models/patient-file.model';
 import {DivisionService} from '../../core/services/division.service';
-import {DivisionInfo} from '../../shared/models/division-info.model';
-
-
+import {DivisionInfo} from '../../shared/models/division.model';
 
 @Component({
   selector: 'app-admit-patient',
@@ -157,7 +155,6 @@ export class AdmitPatientComponent implements OnInit {
           ...(e.payload.doc.data() as object)
         } as DivisionInfo;
       });
-      //console.log(this.divisions);
       this.currentDivisionRE = this.divisions[0].id;
       this.currentDivision = this.divisions[0].id;
       this.divisionPatients = [];
@@ -171,7 +168,7 @@ export class AdmitPatientComponent implements OnInit {
       else{
         this.noPatients = true;
       }
-      
+
       this.capacity = (this.divisions.find(o => o.id === this.currentDivision).totalCapacity == this.divisions.find(o => o.id === this.currentDivision).currentCapacity) ? true : false;
     })
 

@@ -4,7 +4,6 @@
   <input type="text" class="mat-form-field" id="patientId" placeholder="patient id" [(ngModel)]="patientId" required
          [value]="patientId">
   <button (click)="getPatientInformation(patientId)" [disabled]="patientId == ''"
-          [ngClass]="patientId == '' ? 'search-invalid':'search-valid'"
   >Search</button>
 </div>
 <div class="patient-display" *ngIf="activePatient != null">
@@ -33,4 +32,8 @@
     <p>{{activePatient.socialInsurance}}</p>
   </div>
 </div>
+<div class="update-file">
+  <a class="update-file-button" *ngIf="activePatient != null" [routerLink]="['/updatePatient',activePatient.id]">Update File</a>
+</div>
+
 </body>

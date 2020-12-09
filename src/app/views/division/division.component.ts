@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {DivisionService} from '../../core/services/division.service';
-import {Division} from '../../shared/models/division.model';
 
 @Component({
   selector: 'app-division',
