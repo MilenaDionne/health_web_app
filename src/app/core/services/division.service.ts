@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
-import {DivisionInfo} from '../../shared/models/division-info.module';
+import {DivisionInfo} from '../../shared/models/division-info.model';
 import {Observable} from 'rxjs';
 import firebase from 'firebase';
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
@@ -17,64 +17,19 @@ export class DivisionService {
   ) { }
   currentFile: DivisionInfo;
 
-  getDivisionsInfos(): Observable<DocumentChangeAction<unknown>[]>{
+  updateDivisionInfo(divisionInfo: DivisionInfo): void{
+    this.firestore.collection('divisions').doc(divisionInfo.id).update(divisionInfo).then(r => {
+      alert('file updated successfully!');
+    }).catch(error => {
+      alert('Save unsuccessful' + error);
+    });
+  }
+
+  getDivisions(): Observable<DocumentChangeAction<unknown>[]>{
     return this.firestore.collection('divisions').snapshotChanges();
   }
 
-  getDivisionInfo(docId: string): Observable<unknown>{
-    const data = this.firestore.collection('divisions').doc(docId).valueChanges();
-    return data;
-  }
-
-  popPatientList(docId: string): string{
-    return;
-  }
-
-  getPatients(docId: string):string []{
-    return;
-  }
-
-  addPatient(docId: string, patId: string){
-    this.firestore.collection('divisions').doc(docId).update({
-      patients: firebase.firestore.FieldValue.arrayUnion(patId)
-    });
-  }
-
-  removePatient(docId: string, patId: string){
-    this.firestore.collection('divisions').doc(docId).update({
-      patients: firebase.firestore.FieldValue.arrayRemove(patId)
-    });
-  }
-
-  addPatientRequest(docId: string, patId: string){
-    this.firestore.collection('divisions').doc(docId).update({
-      patientRequests: firebase.firestore.FieldValue.arrayUnion(patId)
-    });
-  }
-
-  removePatientRequest(docId: string, patId: string): Observable<unknown>{
-    const data = this.firestore.collection('divisions').doc(docId).valueChanges({
-      patientRequests: firebase.firestore.FieldValue.bind(patId)
-    });
-
-    this.firestore.collection('divisions').doc(docId).update({
-      patientRequests: firebase.firestore.FieldValue.arrayRemove(patId)
-    });
-    return data;
-  }
-
-  getTotalCapacity(docId: string){
-    // const data = this.firestore.collection('divisions').doc(docId).ref => ref.orderByChild('totalCapacity');
-    // return data;
-  }
-
-  getCurrentCapacity(docId: string){
-    // const data = this.firestore.collection('divisions').doc(docId).valueChanges();
-    // return data;
-  }
-
-  updateCurrentCapacity(docId: string){
-    // const data = this.firestore.collection('divisions').doc(docId).valueChanges();
-    // return data;
+  getDivision(docId: string): Observable<unknown>{
+    return this.firestore.collection('divisions').doc(docId).valueChanges();
   }
 }

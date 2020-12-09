@@ -7,7 +7,7 @@ import { TitleCasePipe } from '@angular/common';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { AuthField, AuthFormFields } from './auth.config';
-import { UserRegistration } from 'src/app/shared/models/user.model';
+import { MedicalStaff } from 'src/app/shared/models/user.model';
 
 interface AuthFormState {
   inLoginMode: boolean;
@@ -26,6 +26,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   public formFields: AuthField[];
   public formState: AuthFormState;
   public serverError: string;
+  roles = ['Doctor', 'Nurse', 'ChargeNurse'];
 
   get submitButtonText(): string {
     return this.formState.inLoginMode ? 'login' : 'register';
@@ -102,19 +103,18 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   public async onSubmit(form: FormGroup): Promise<void> {
     this.loadingService.setLoading(true);
-    const { email, password, username, firstName, lastName } = form.value;
+    const { email, password, employeeNumber, firstName, lastName , role} = form.value;
     try {
       if (this.formState.inRegisterMode) {
-        const newUser: UserRegistration = {
-          displayName: username,
+        const newUser: MedicalStaff = {
+          employeeNumber,
           email,
+          role,
           firstName: this.titleCasePipe.transform(firstName),
-          fullName: this.titleCasePipe.transform(firstName + (lastName ? ` ${lastName}` : ``)),
           lastName: this.titleCasePipe.transform(lastName),
-          password,
           uid: null,
         };
-        await this.authService.register(newUser);
+        await this.authService.register(newUser, password);
       }
       await this.authService.login(form.value.email, form.value.password);
     } catch (err) {
@@ -131,11 +131,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   public getErrorMessage(control: AbstractControl): string {
     if (control.hasError('required')) { return 'You must enter a value'; }
     if (control.hasError('email')) { return 'You must enter a valid email'; }
-    return '';
-  }
-
-  public getFormErrorMessage(errors: ValidationErrors): string {
-    if (errors?.passwordMismatch) { return 'Passwords must match.'; }
     return '';
   }
 }

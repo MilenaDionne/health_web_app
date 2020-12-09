@@ -1,6 +1,5 @@
-export type AuthFormState = 'login' | 'register';
 
-export interface AuthField {
+export interface PatientFile {
   controlName: string;
   defaultValue: unknown;
   icon: string;
@@ -11,7 +10,7 @@ export interface AuthField {
   validators: string[];
 }
 
-export const AuthFormFields: AuthField[] = [
+export const PatientFormFields: PatientFile[] = [
   {
     controlName: 'firstName',
     isOnlyForRegister: true,
