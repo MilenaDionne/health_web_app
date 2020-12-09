@@ -5,19 +5,13 @@
       <img src="assets/img/theme/profile-cover.jpg" alt="Users-image" class="mat-radio-inner-circle" width="222">
       <div class="mt-3">
         <h4>
-          <div *ngFor='let i of myArray'>
-            <div *ngIf="i.uid == user.uid">{{i.role}}</div>
-          </div>
+          {{ (users | async).firstName }}
         </h4>
         <div class="text-secondarymb-1">
-          <div *ngFor='let i of myArray'>
-            <div *ngIf="i.uid == user.uid">{{i.role}}</div>
-          </div>
+          {{ (users | async).role }}
         </div>
         <div class="text-mutedfont-size-sm">
-          <div *ngFor='let i of myArray'>
-            <div *ngIf="i.uid == user.uid">{{i.employeeNumber}}</div>
-          </div>
+          {{ (users | async).employeeNumber }}
         </div>
       </div>
     </div>
@@ -27,9 +21,7 @@
           <h6 class="mb-0">Full Name</h6>
         </div>
         <div class="col-sm-9 text-secondary">
-          <div *ngFor='let i of myArray'>
-            <div *ngIf="i.uid == user.uid">{{i.role}}</div>
-          </div>
+          {{ (users | async).firstName }} {{ (users | async).lastName }}
         </div>
       </div>
       <hr>
@@ -38,7 +30,7 @@
           <h6 class="mb-0">Email</h6>
         </div>
         <div class="col-sm-9 text-secondary">
-          {{user.email}}
+          {{ (users | async).email }}
         </div>
       </div>
       <hr>
@@ -47,9 +39,7 @@
           <h6 class="mb-0">Employee Number</h6>
         </div>
         <div class="col-sm-9 text-secondary">
-          <div *ngFor='let i of myArray'>
-            <div *ngIf="i.uid == user.uid">{{i.employeeNumber}}</div>
-          </div>
+          {{ (users | async).employeeNumber }}
         </div>
       </div>
       <hr>
@@ -58,9 +48,7 @@
           <h6 class="mb-0">Role</h6>
         </div>
         <div class="col-sm-9 text-secondary">
-          <div *ngFor='let i of myArray'>
-            <div *ngIf="i.uid == user.uid">{{i.role}}</div>
-          </div>
+          {{ (users | async).role }}
         </div>
       </div>
     </div>
