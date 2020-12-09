@@ -30,7 +30,8 @@ export class HeaderComponent implements OnInit {
     { label: 'register Patient', path: 'registerPatient', guards: ['chargeNurse'] },
     { label: 'admit Patient', path: 'admitPatient', guards: ['chargeNurse'] },
     { label: 'consult Patient', path: 'consultPatient', guards: ['chargeNurse'] },
-    { label: 'divisions', path: 'divisions', guards: ['chargeNurse']}
+    { label: 'divisions', path: 'divisions', guards: ['chargeNurse']},
+    { label: 'prescription', path: 'prescription', guards: ['doctor']}
   ];
 
   constructor(public authService: AuthService) {

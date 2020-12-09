@@ -171,7 +171,7 @@ export class AdmitPatientComponent implements OnInit {
       else{
         this.noPatients = true;
       }
-      
+
       this.capacity = (this.divisions.find(o => o.id === this.currentDivision).totalCapacity == this.divisions.find(o => o.id === this.currentDivision).currentCapacity) ? true : false;
     })
 

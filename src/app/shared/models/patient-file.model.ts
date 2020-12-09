@@ -6,4 +6,5 @@ export interface PatientFile{
   email?: string;
   phoneNumber?: string;
   divisionId?: string;
+  prescription?: string;
 }
