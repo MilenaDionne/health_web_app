@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
+import { DocumentChangeAction} from '@angular/fire/firestore';
 import {PatientFile} from '../../shared/models/patient-file.model';
 import {Patient} from '../../shared/models/patient.model';
 import {Observable} from 'rxjs';
@@ -23,8 +23,7 @@ export class PatientService {
   message: string;
   hideMsg = true;
 
-  constructor(
-    private firestore: AngularFirestore, private store: FirestoreService) { }
+  constructor( private store: FirestoreService) { }
 
   showMessage(type: string, msg: string): void {
     this.msgStyle.color = type === 'error' ? 'red' : 'blue';
@@ -74,7 +73,7 @@ export class PatientService {
     this.store.updatePatientFile(patientFile);
   }
   updatePatient(patientFile: Patient): void{
-    this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
+    this.store.updatePatient(patientFile).then(r => {
       alert('file updated successfully!');
     }).catch(error => {
       alert('Save unsuccessful' + error);
