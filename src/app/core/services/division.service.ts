@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
-import {DivisionInfo} from '../../shared/models/division-info.model';
+import {DivisionInfo} from '../../shared/models/division.model';
 import {Observable} from 'rxjs';
 import firebase from 'firebase';
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;

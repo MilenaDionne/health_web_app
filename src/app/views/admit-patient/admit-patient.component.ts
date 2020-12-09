@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PatientService} from '../../core/services/patient.service';
 import {PatientFile} from '../../shared/models/patient-file.model';
 import {DivisionService} from '../../core/services/division.service';
-import {DivisionInfo} from '../../shared/models/division-info.model';
+import {DivisionInfo} from '../../shared/models/division.model';
 
 
 

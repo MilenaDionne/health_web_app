@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PatientFile} from '../../shared/models/patient-file.model';
-import {DivisionInfo} from '../../shared/models/division-info.model';
+import {DivisionInfo} from '../../shared/models/division.model';
 import {PatientService} from '../../core/services/patient.service';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
