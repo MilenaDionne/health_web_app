@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TitleCasePipe } from '@angular/common';
 
-import { AuthService } from 'src/app/core/services/auth.service';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { AuthField, AuthFormFields } from './auth.config';
 import { MedicalStaff } from 'src/app/shared/models/user.model';
+import {UserManagementFacadeService} from '../../core/facades/user-management-facade.service';
 
 interface AuthFormState {
   inLoginMode: boolean;
@@ -37,7 +37,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private authService: AuthService,
+    private userManagementFacade: UserManagementFacadeService,
     private formBuilder: FormBuilder,
     private loadingService: LoadingService,
     private router: Router,
@@ -115,9 +115,9 @@ export class AuthComponent implements OnInit, OnDestroy {
           lastName: this.titleCasePipe.transform(lastName),
           uid: null,
         };
-        await this.authService.register(newUser, password);
+        await this.userManagementFacade.registerStaff(newUser, password);
       }
-      await this.authService.login(form.value.email, form.value.password);
+      await this.userManagementFacade.staffLogin(form.value.email, form.value.password);
     } catch (err) {
       this.serverError = err;
     }
