@@ -89,13 +89,21 @@ export class UpdatePatientComponent implements OnInit {
     this.patientService.getPatientFile(this.patientId).subscribe(data => {
       this.activePatientFile = {
         id: this.patientId,
+        // @ts-ignore
         firstName: data.firstName,
+        // @ts-ignore
         lastName: data.lastName,
+        // @ts-ignore
         socialInsurance: data.socialInsurance,
+        // @ts-ignore
         birthDate: data.birthDate,
+        // @ts-ignore
         gender: data.gender,
+        // @ts-ignore
         maritalStatus: data.maritalStatus,
+        // @ts-ignore
         externalDoctorId: data.externalDoctorId,
+        // @ts-ignore
         doctorId: data.doctorId
       } as Patient;
       this.setFormValues();
@@ -136,7 +144,7 @@ export class UpdatePatientComponent implements OnInit {
       return;
     }
     if (confirm('Are you sure you want to save the form?')){
-      this.patientService.updatePatientFile(this.modifiedPatientFile);
+      this.patientService.updatePatient(this.modifiedPatientFile);
       this.patientForm.disable();
       this.edited = false;
     }
