@@ -110,6 +110,7 @@ export class AuthComponent implements OnInit, OnDestroy {
           employeeNumber,
           email,
           role,
+          displayName: role,
           firstName: this.titleCasePipe.transform(firstName),
           lastName: this.titleCasePipe.transform(lastName),
           uid: null,
