@@ -20,7 +20,7 @@ export class UserManagementFacadeService {
     return this.authService.login(email, password);
   }
 
-  public staffLogout(email: string, password: string): Promise<void>{
+  public staffLogout(): Promise<void>{
     return this.authService.logout();
   }
 }
