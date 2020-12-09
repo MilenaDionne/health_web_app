@@ -40,11 +40,11 @@ export class PatientService {
   }
 
   getPatientFiles(): Observable<DocumentChangeAction<unknown>[]>{
-    return this.firestore.collection('patients').snapshotChanges();
+    return this.store.getPatientFiles();
   }
 
   getPatientFile(docId: string): Observable<unknown>{
-    return this.firestore.collection('patients').doc(docId).valueChanges();
+    return this.store.getPatientFile(docId);
   }
 
   addPatient(p: Patient): void{
@@ -77,11 +77,7 @@ export class PatientService {
   // }
   //
   updatePatientFile(patientFile: PatientFile): void{
-    this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
-      alert('file updated successfully!');
-    }).catch(error => {
-      alert('Save unsuccessful' + error);
-    });
+    this.store.updatePatientFile(patientFile);
   }
   updatePatient(patientFile: Patient): void{
     this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
@@ -92,11 +88,7 @@ export class PatientService {
   }
 
   addPrescription(patientFile: PatientFile): void{
-    this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
-      alert('file updated successfully!');
-    }).catch(error => {
-      alert('Save unsuccessful' + error);
-    });
+    this.store.addPrescription(patientFile);
   }
 
 

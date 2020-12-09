@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import firebase from 'firebase';
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 import {AuthService} from './auth.service';
+import {FirestoreService} from './firestore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,22 +15,19 @@ export class DivisionService {
   constructor(
     private firestore: AngularFirestore,
     private authService: AuthService,
+    private store: FirestoreService
   ) { }
   currentFile: DivisionInfo;
 
   updateDivisionInfo(divisionInfo: DivisionInfo): void{
-    this.firestore.collection('divisions').doc(divisionInfo.id).update(divisionInfo).then(r => {
-      alert('file updated successfully!');
-    }).catch(error => {
-      alert('Save unsuccessful' + error);
-    });
+    this.store.updateDivisionInfo(divisionInfo);
   }
 
   getDivisions(): Observable<DocumentChangeAction<unknown>[]>{
-    return this.firestore.collection('divisions').snapshotChanges();
+    return this.store.getDivisions();
   }
 
   getDivision(docId: string): Observable<unknown>{
-    return this.firestore.collection('divisions').doc(docId).valueChanges();
+    return this.store.getDivisions();
   }
 }
