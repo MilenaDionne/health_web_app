@@ -1,0 +1,68 @@
+.patient-display{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.search-container{
+  display: grid;
+  grid-template-columns: minmax(250px, 700px);
+  justify-content: center;
+}
+
+.search-container label{
+  font-size: 24px;
+  justify-self: start;
+}
+
+.search-container input{
+  border: 1px solid black;
+  height: 2vh;
+  margin-bottom: 10px;
+}
+
+.search-container button {
+  width: 10vw;
+  text-transform: uppercase;
+  justify-self: center;
+  color: #000;
+  background-color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  padding: 10px;
+}
+
+.search-container button:hover{
+  background-color: #2EE59D;
+  cursor: pointer;
+  transform: translateY(-3px);
+  color: #fff;
+}
+
+.update-file{
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+}
+
+.update-file-button{
+  display: grid;
+  width: 10vw;
+  text-transform: uppercase;
+  justify-self: center;
+  color: #000;
+  background-color: #fff;
+  font-size: 20px;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  padding: 10px;
+  text-align: center;
+}

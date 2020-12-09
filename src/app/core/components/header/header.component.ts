@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
     { label: 'home', path: '', guards: ['chargeNurse'] },
     { label: 'profile', path: 'profile', guards: ['doctor'] },
     { label: 'register Patient', path: 'registerPatient', guards: ['chargeNurse'] },
-    { label: 'update Patient', path: 'updatePatient', guards: ['chargeNurse'] },
     { label: 'admit Patient', path: 'admitPatient', guards: ['chargeNurse'] },
     { label: 'consult Patient', path: 'consultPatient', guards: ['chargeNurse'] },
     { label: 'divisions', path: 'divisions', guards: ['chargeNurse']}
@@ -39,12 +38,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ssss');
     this.user.subscribe(res => {
       this.role = res.role;
       this.getSideNavButtons();
     });
-    //console.log(this.getSideNavButtons());
   }
 
 
