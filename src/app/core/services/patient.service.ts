@@ -3,8 +3,6 @@ import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {PatientFile} from '../../shared/models/patient-file.model';
 import {Patient} from '../../shared/models/patient.model';
 import {Observable} from 'rxjs';
-import {UserService} from './user.service';
-import firebase from 'firebase';
 import {FirestoreService} from './firestore.service';
 
 @Injectable({
@@ -26,7 +24,7 @@ export class PatientService {
   hideMsg = true;
 
   constructor(
-    private firestore: AngularFirestore, private userService: UserService, private store: FirestoreService) { }
+    private firestore: AngularFirestore, private store: FirestoreService) { }
 
   showMessage(type: string, msg: string): void {
     this.msgStyle.color = type === 'error' ? 'red' : 'blue';
@@ -69,13 +67,9 @@ export class PatientService {
 
   select(patient: Patient): void {
     this.currentPatient = patient;
-    this.userService.selectionChanged(patient);
   }
 
-  // deletePatientFile(){
-  //
-  // }
-  //
+
   updatePatientFile(patientFile: PatientFile): void{
     this.store.updatePatientFile(patientFile);
   }
