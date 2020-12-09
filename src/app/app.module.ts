@@ -8,9 +8,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { environment } from '../environments/environment';
+//import { ConsultPatientComponent } from './consult-patient/consult-patient.component';
 @NgModule({
   declarations: [
     AppComponent,
+    //ConsultPatientComponent,
   ],
   imports: [
     BrowserModule,

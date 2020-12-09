@@ -1,0 +1,36 @@
+<body>
+<div class="search-container">
+  <label for="patientId">Patient Id</label>
+  <input type="text" class="mat-form-field" id="patientId" placeholder="patient id" [(ngModel)]="patientId" required
+         [value]="patientId">
+  <button (click)="getPatientInformation(patientId)" [disabled]="patientId == ''"
+          [ngClass]="patientId == '' ? 'search-invalid':'search-valid'"
+  >Search</button>
+</div>
+<div class="patient-display" *ngIf="activePatient != null">
+  <div class="patient-property">
+    <h2>First Name</h2>
+    <p>{{activePatient.firstName}}</p>
+  </div>
+  <div class="patient-property">
+    <h2>Last Name</h2>
+    <p>{{activePatient.lastName}}</p>
+  </div>
+  <div class="patient-property">
+    <h2>Date Of Birth</h2>
+    <p>{{activePatient.birthDate}}</p>
+  </div>
+  <div class="patient-property">
+    <h2>Gender</h2>
+    <p>{{activePatient.gender}}</p>
+  </div>
+  <div class="patient-property">
+    <h2>Marital Status</h2>
+    <p>{{activePatient.maritalStatus}}</p>
+  </div>
+  <div class="patient-property">
+    <h2>Social Insurance</h2>
+    <p>{{activePatient.socialInsurance}}</p>
+  </div>
+</div>
+</body>

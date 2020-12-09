@@ -27,7 +27,7 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'updateFile',
+    path: 'updatePatient',
     loadChildren: () => import('./views/update-patient/update-patient.module').then(m => m.UpdatePatientModule),
     ...canActivate(redirectUnauthorizedToLogin),
   },
@@ -35,7 +35,12 @@ const routes: Routes = [
     path: 'divisions',
     loadChildren: () => import('./views/division/division.module').then(m => m.DivisionModule),
     ...canActivate(redirectUnauthorizedToLogin)
-  }
+  },
+  {
+      path: 'consultPatient',
+      loadChildren: () => import('./views/consult-patient/consult-patient.module').then(m => m.ConsultPatientModule),
+      ...canActivate(redirectUnauthorizedToLogin)
+    }
 ];
 
 @NgModule({
