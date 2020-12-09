@@ -1,7 +1,7 @@
 enum Role{
   doctor= 'Doctor',
   nurse= 'Nurse',
-  chargeNurse= 'Charge Nurse'
+  chargeNurse= 'ChargeNurse'
 }
 export interface User { // Base class for  Firebase auth. Do not modify.
   email: string;
