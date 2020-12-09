@@ -30,6 +30,11 @@ const routes: Routes = [
     path: 'updateFile',
     loadChildren: () => import('./views/update-patient/update-patient.module').then(m => m.UpdatePatientModule),
     ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: 'divisions',
+    loadChildren: () => import('./views/division/division.module').then(m => m.DivisionModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   }
 ];
 
