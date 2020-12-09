@@ -1,0 +1,28 @@
+<body>
+  <div class="search-container">
+    <label for="divisionId">Division Id</label>
+    <input type="text" class="mat-form-field" id="divisionId" placeholder="division id" [(ngModel)]="divisionId" required
+           [value]="divisionId">
+    <button (click)="getDivisionInformation(divisionId)" [disabled]="divisionId == ''"
+            [ngClass]="divisionId == '' ? 'search-invalid':'search-valid'"
+    >Search</button>
+  </div>
+  <div class="division-display" *ngIf="activeDivision != null">
+    <div class="division-property">
+      <h2>Name</h2>
+      <h3>{{activeDivision.name}}</h3>
+    </div>
+    <div class="division-property">
+      <h2>Current Capacity</h2>
+      <h3>{{activeDivision.currentCapacity}}</h3>
+    </div>
+    <div class="division-property">
+      <h2>Patients</h2>
+      <h3>{{activeDivision.patients}}</h3>
+    </div>
+    <div class="division-property">
+      <h2>Total Capacity</h2>
+      <h3>{{activeDivision.totalCapacity}}</h3>
+    </div>
+  </div>
+</body>

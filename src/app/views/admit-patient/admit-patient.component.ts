@@ -61,7 +61,6 @@ export class AdmitPatientComponent implements OnInit {
     division.patients.forEach((element, index) => {
       if (element == currentPatient){
         division.patients.splice(index, 1);
-        console.log(division.patientRequests.length);
         if (!(division.patientRequests.length == 0)){
           division.patients.push(division.patientRequests[0]);
           division.patientRequests.splice(0, 1);
@@ -71,7 +70,7 @@ export class AdmitPatientComponent implements OnInit {
         return division;
       }
     });
-    
+
     return division;
   }
 
@@ -121,7 +120,7 @@ export class AdmitPatientComponent implements OnInit {
 
   updateCapacity(): void{
     this.capacity = (this.divisions.find(o => o.id === this.currentDivision).totalCapacity == this.divisions.find(o => o.id === this.currentDivision).currentCapacity) ? true : false;
-    console.log(this.capacity);
+    //console.log(this.capacity);
   }
 
 

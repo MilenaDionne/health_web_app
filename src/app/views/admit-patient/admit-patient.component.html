@@ -10,7 +10,6 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <p> Selected patient: {{currentPatient}} </p>
 
         <h4>Select Division</h4>
         <mat-form-field appearance="fill">
@@ -21,7 +20,6 @@
             </mat-option>
         </mat-select>
         </mat-form-field>
-        <p> Selected division: {{currentDivision}} </p>
     </div>
     <button (click)="admitButton()" [disabled]="this.capacity == true || this.noUnassignedPatients">Request Admission</button>
     <button (click)="admitListButton()" [disabled]="this.capacity == false || this.noUnassignedPatients">Request List Admission</button>
@@ -29,7 +27,7 @@
 
 <div>
     <h2>Remove Patient</h2>
-    <h4>Select Division First</h4>
+    <p>Please Select Division First</p>
     <div>
         <h4>Select Patient</h4>
         <mat-form-field appearance="fill">
@@ -40,7 +38,6 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <p> Selected patient: {{currentPatientRE}} </p>
 
         <h4>Select Division</h4>
         <mat-form-field appearance="fill">
@@ -51,7 +48,6 @@
             </mat-option>
         </mat-select>
         </mat-form-field>
-        <p> Selected division: {{currentDivisionRE}} </p>
     </div>
     <button (click)="removeButton()" [disabled]="this.noPatients">Request Removal</button>
 </div>

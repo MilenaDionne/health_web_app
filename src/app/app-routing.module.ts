@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { Routes, RouterModule } from '@angular/router';
+import {DoctorUserGuard} from './core/guards/doctor-user.guard';
+import {ChargeNurseGuardGuard} from './core/guards/charge-nurse-guard.guard';
 
 const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth']);
@@ -25,6 +27,7 @@ const routes: Routes = [
     path: 'registerPatient',
     loadChildren: () => import('./views/register-patient/register-patient.module').then(m => m.RegisterPatientModule),
     ...canActivate(redirectUnauthorizedToLogin),
+    canActivate: [DoctorUserGuard]
   },
   {
     path: 'admitPatient',
@@ -32,10 +35,21 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'updateFile',
+    path: 'updatePatient',
     loadChildren: () => import('./views/update-patient/update-patient.module').then(m => m.UpdatePatientModule),
     ...canActivate(redirectUnauthorizedToLogin),
-  }
+  },
+  {
+    path: 'divisions',
+    loadChildren: () => import('./views/division/division.module').then(m => m.DivisionModule),
+    ...canActivate(redirectUnauthorizedToLogin),
+    // canActivate: [ChargeNurseGuardGuard]
+  },
+  {
+      path: 'consultPatient',
+      loadChildren: () => import('./views/consult-patient/consult-patient.module').then(m => m.ConsultPatientModule),
+      ...canActivate(redirectUnauthorizedToLogin)
+    }
 ];
 
 @NgModule({
