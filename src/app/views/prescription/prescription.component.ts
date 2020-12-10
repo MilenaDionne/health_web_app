@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PatientFile} from '../../shared/models/patient-file.model';
 import {PatientService} from '../../core/services/patient.service';
+import {PatientFacadeService} from '../../core/facades/patient-facade.service';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -19,7 +20,7 @@ export class PrescriptionComponent implements OnInit {
   @Input() activePatientFile: PatientFile;
   enteredFirstName: any;
 
-  constructor(private builder: FormBuilder, private patientService: PatientService) { }
+  constructor(private builder: FormBuilder, private patientService: PatientService, private patientFacadeService: PatientFacadeService) { }
 
 
   ngOnInit(): void {
@@ -33,24 +34,23 @@ export class PrescriptionComponent implements OnInit {
 
       this.unassignedPatients = [];
       this.patients.forEach((element) => {
-         this.unassignedPatients.push(element);
+        this.unassignedPatients.push(element);
       });
+
+
+      this.activePatientFile = this.patients[0];
+      this.setFormValues();
     });
 
     this.patientForm = this.builder.group({
       id: ['', [Validators.required]],
       prescription: ['']
     });
-
-    this.activePatientFile = this.patients[0];
-    this.setFormValues();
-
   }
 
   setFormValues(): void{
     this.patientForm.controls.id.setValue(this.activePatientFile.id);
-    this.patientForm.controls.lastName.setValue(this.activePatientFile.prescription);
-    this.patientForm.disable();
+
   }
 
   onSubmit(): void{
@@ -60,13 +60,13 @@ export class PrescriptionComponent implements OnInit {
   getPatientInformation(patientId: string): boolean {
 
     this.patientService.getPatientFile(patientId).subscribe(data => {
-        if (data){
-          this.currentPatient = data;
-          return true;
-        }
-        else{
-          return false;
-        }
+      if (data){
+        this.currentPatient = data;
+        return true;
+      }
+      else{
+        return false;
+      }
     });
     return true;
   }
@@ -80,7 +80,13 @@ export class PrescriptionComponent implements OnInit {
   }
 
   get modifiedPatientFile(): PatientFile{
-    this.activePatientFile.id = this.patientForm.controls.id.value;
+    this.patients.forEach((element) => {
+      if ( element.id === this.currentId)
+      {
+        this.activePatientFile = element;
+      }
+    });
+    this.activePatientFile.id = this.currentId;
     this.activePatientFile.prescription = this.patientForm.controls.prescription.value;
     return this.activePatientFile;
   }

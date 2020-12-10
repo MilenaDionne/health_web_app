@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
 import {PatientService} from '../../core/services/patient.service';
-import {LoadingService} from '../../core/services/loading.service';
-import {Router} from '@angular/router';
-import {TitleCasePipe} from '@angular/common';
+import {PatientFacadeService} from '../../core/facades/patient-facade.service';
 import {Patient} from '../../shared/models/patient.model';
 
 function genderValidator(control: FormControl): { [s: string]: boolean } | null {
@@ -41,7 +38,7 @@ export class RegisterPatientComponent implements OnInit {
   get gender(): AbstractControl {return this.patientFile.get('gender'); }
   get maritalStatus(): AbstractControl {return this.patientFile.get('maritalStatus'); }
 
-  constructor(private builder: FormBuilder, private patientService: PatientService) { }
+  constructor(private builder: FormBuilder, private patientService: PatientService, private patientFacadeService: PatientFacadeService) { }
 
   ngOnInit(): void {}
 
@@ -56,7 +53,7 @@ export class RegisterPatientComponent implements OnInit {
       this.patientFile.value.externalDoctorId,
       this.patientFile.value.doctorId,
       this.patientFile.value.prescription);
-    this.patientService.addPatient(patient);
+    this.patientFacadeService.generatePatient(patient);
     this.patientFile.reset();
   }
 }

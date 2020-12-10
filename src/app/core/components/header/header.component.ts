@@ -57,7 +57,6 @@ export class HeaderComponent implements OnInit {
 
   public getSideNavButtons(): SideNavButton[]
   {
-    console.log(this.role);
     let data: SideNavButton[] =[];
     for ( const button of this.sideNavButtons){
       const guards = button.guards;

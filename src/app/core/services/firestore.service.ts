@@ -19,7 +19,7 @@ export class FirestoreService {
     return this.firestore.collection('patients').doc(docId).valueChanges();
   }
 
-  creeatePatient(patient: Patient): Promise<DocumentReference> {
+  createPatient(patient: Patient): Promise<DocumentReference> {
     delete patient.id;
     return this.firestore.collection('patients').add({...patient});
   }
@@ -42,6 +42,8 @@ export class FirestoreService {
   }
 
   addPrescription(patientFile: PatientFile): void{
+    console.log("patientFilesfsf");
+    console.log(patientFile);
     this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
       alert('file updated successfully!');
     }).catch(error => {

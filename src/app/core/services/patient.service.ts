@@ -49,7 +49,7 @@ export class PatientService {
     this.select(p);
 
     if (this.currentPatient.id === null){
-      this.store.creeatePatient(this.currentPatient).then(
+      this.store.createPatient(this.currentPatient).then(
         docRef => {
         this.currentPatient.id = docRef.id;
         this.showMessage('info', 'The address entry was successfully saved');
