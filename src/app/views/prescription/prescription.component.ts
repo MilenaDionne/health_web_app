@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PatientFile} from '../../shared/models/patient-file.model';
-import {PatientService} from '../../core/services/patient.service';
 import {PatientFacadeService} from '../../core/facades/patient-facade.service';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
@@ -20,11 +19,11 @@ export class PrescriptionComponent implements OnInit {
   @Input() activePatientFile: PatientFile;
   enteredFirstName: any;
 
-  constructor(private builder: FormBuilder, private patientService: PatientService, private patientFacadeService: PatientFacadeService) { }
+  constructor(private builder: FormBuilder, private patientFacadeService: PatientFacadeService) { }
 
 
   ngOnInit(): void {
-    this.patientService.getPatientFiles().subscribe(data => {
+    this.patientFacadeService.getPatientFiles().subscribe(data => {
       this.patients = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -59,7 +58,7 @@ export class PrescriptionComponent implements OnInit {
 
   getPatientInformation(patientId: string): boolean {
 
-    this.patientService.getPatientFile(patientId).subscribe(data => {
+    this.patientFacadeService.consultFile(patientId).subscribe(data => {
       if (data){
         this.currentPatient = data;
         return true;
@@ -92,8 +91,7 @@ export class PrescriptionComponent implements OnInit {
   }
 
   savePrescription(): void{
-    this.patientService.addPrescription(this.modifiedPatientFile);
-    this.patientForm.disable();
+    this.patientFacadeService.addPrescription(this.modifiedPatientFile);
   }
 
 }
