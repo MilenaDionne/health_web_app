@@ -27,12 +27,12 @@ const routes: Routes = [
     path: 'registerPatient',
     loadChildren: () => import('./views/register-patient/register-patient.module').then(m => m.RegisterPatientModule),
     ...canActivate(redirectUnauthorizedToLogin),
-    //canActivate: [DoctorUserGuard]
   },
   {
     path: 'admitPatient',
     loadChildren: () => import('./views/admit-patient/admit-patient.module').then(m => m.AdmitPatientModule),
     ...canActivate(redirectUnauthorizedToLogin),
+    canActivate: [ChargeNurseGuardGuard]
   },
   {
     path: 'updatePatient/:id',
@@ -43,7 +43,7 @@ const routes: Routes = [
     path: 'divisions',
     loadChildren: () => import('./views/division/division.module').then(m => m.DivisionModule),
     ...canActivate(redirectUnauthorizedToLogin),
-    // canActivate: [ChargeNurseGuardGuard]
+    canActivate: [ChargeNurseGuardGuard]
   },
   {
       path: 'consultPatient',
@@ -54,7 +54,8 @@ const routes: Routes = [
   {
     path: 'prescription',
     loadChildren: () => import('./views/prescription/prescription.module').then(m => m.PrescriptionModule),
-    ...canActivate(redirectUnauthorizedToLogin)
+    ...canActivate(redirectUnauthorizedToLogin),
+    canActivate: [DoctorUserGuard]
   }
 ];
 
