@@ -26,4 +26,8 @@ export class PatientFacadeService {
   public getPatientFiles(): Observable<DocumentChangeAction<unknown>[]>{
     return this.patientService.getPatientFiles();
   }
+
+  updatePatientFile(patientFile: PatientFile): void{
+    this.patientService.updatePatientFile(patientFile);
+  }
 }

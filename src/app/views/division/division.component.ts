@@ -35,4 +35,8 @@ export class DivisionComponent implements OnInit {
     });
   }
 
+  getDivisionCapacity(divisionId: string): string{
+    return this.divisionService.getAvailableBeds(divisionId);
+  }
+
 }

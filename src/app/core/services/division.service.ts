@@ -27,4 +27,8 @@ export class DivisionService {
   getDivision(docId: string): Observable<unknown>{
     return this.store.getDivision(docId);
   }
+
+  getAvailableBeds(docId: string): string{
+    return this.store.getDivisionCapacity(docId); // dont use
+  }
 }

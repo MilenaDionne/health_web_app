@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {PatientService} from '../../core/services/patient.service';
 import {PatientFile} from '../../shared/models/patient-file.model';
-import {DivisionService} from '../../core/services/division.service';
 import {DivisionInfo} from '../../shared/models/division.model';
+import {PatientFacadeService} from '../../core/facades/patient-facade.service';
+import {DivisionFacadeService} from '../../core/facades/division-facade.service';
 
 @Component({
   selector: 'app-admit-patient',
@@ -12,8 +12,8 @@ import {DivisionInfo} from '../../shared/models/division.model';
 export class AdmitPatientComponent implements OnInit {
 
   constructor(
-    private patientService: PatientService,
-    private divisionService: DivisionService
+    private patientFacade: PatientFacadeService,
+    private divisionFacade: DivisionFacadeService
   ) { }
 
   capacity: boolean;
@@ -80,34 +80,34 @@ export class AdmitPatientComponent implements OnInit {
 
   admitButton(): void{
     if (confirm('Are you sure you want to admit this patient?')){
-      this.divisionService.updateDivisionInfo(this.addModifiedDivision(this.divisions, this.currentDivision, this.currentPatient));
-      this.patientService.updatePatientFile(this.addModifiedPatient(this.patients, this.currentPatient, this.currentDivision));
+      this.divisionFacade.updateDivisionInfo(this.addModifiedDivision(this.divisions, this.currentDivision, this.currentPatient));
+      this.patientFacade.updatePatientFile(this.addModifiedPatient(this.patients, this.currentPatient, this.currentDivision));
       this.capacity = (this.divisions.find(o => o.id === this.currentDivision).totalCapacity == this.divisions.find(o => o.id === this.currentDivision).currentCapacity) ? true : false;
     }
   }
 
   admitListButton(): void{
     if (confirm('Are you sure you want to admit this patient?')){
-      this.divisionService.updateDivisionInfo(this.addModifiedDivisionRequest(this.divisions, this.currentDivision, this.currentPatient));
-      this.patientService.updatePatientFile(this.addModifiedPatient(this.patients, this.currentPatient, this.currentDivision));
+      this.divisionFacade.updateDivisionInfo(this.addModifiedDivisionRequest(this.divisions, this.currentDivision, this.currentPatient));
+      this.patientFacade.updatePatientFile(this.addModifiedPatient(this.patients, this.currentPatient, this.currentDivision));
       this.capacity = (this.divisions.find(o => o.id === this.currentDivision).totalCapacity == this.divisions.find(o => o.id === this.currentDivision).currentCapacity) ? true : false;
     }
   }
 
   removeButton(): void{
     if (confirm('Are you sure you want to remove this patient?')){
-      this.divisionService.updateDivisionInfo(this.removeModifiedDivision(this.divisions, this.currentDivisionRE, this.currentPatientRE));
-      this.patientService.updatePatientFile(this.removeModifiedPatient(this.patients, this.currentPatientRE, this.currentDivisionRE));
+      this.divisionFacade.updateDivisionInfo(this.removeModifiedDivision(this.divisions, this.currentDivisionRE, this.currentPatientRE));
+      this.patientFacade.updatePatientFile(this.removeModifiedPatient(this.patients, this.currentPatientRE, this.currentDivisionRE));
       this.capacity = (this.divisions.find(o => o.id === this.currentDivision).totalCapacity == this.divisions.find(o => o.id === this.currentDivision).currentCapacity) ? true : false;
     }
   }
 
   updatePatients(): void{
     this.divisionPatients = [];
-    this.divisions.find(o => o.id === this.currentDivisionRE).patients.forEach((element)=>{
-      this.divisionPatients.push(this.patients.find(x => x.id == element));
-    })
-    if (!(this.divisionPatients.length == 0)){
+    this.divisions.find(o => o.id === this.currentDivisionRE).patients.forEach((element) => {
+      this.divisionPatients.push(this.patients.find(x => x.id === element));
+    });
+    if (!(this.divisionPatients.length === 0)){
       this.noPatients = false;
       this.currentPatientRE = this.divisionPatients[0].id;
     }
@@ -117,25 +117,23 @@ export class AdmitPatientComponent implements OnInit {
   }
 
   updateCapacity(): void{
-    this.capacity = (this.divisions.find(o => o.id === this.currentDivision).totalCapacity == this.divisions.find(o => o.id === this.currentDivision).currentCapacity) ? true : false;
-    //console.log(this.capacity);
+    this.capacity = (this.divisions.find(o => o.id === this.currentDivision).totalCapacity === this.divisions.
+    find(o => o.id === this.currentDivision).currentCapacity) ? true : false;
   }
 
 
   ngOnInit(): void {
 
-    this.patientService.getPatientFiles().subscribe(data => {
+    this.patientFacade.getPatientFiles().subscribe(data => {
       this.patients = data.map(e => {
-        //console.log(e.payload);
         return {
           id: e.payload.doc.id,
           ...(e.payload.doc.data() as object)
         } as PatientFile;
       });
-      //console.log(this.patients);
 
       this.unassignedPatients = [];
-      this.patients.forEach((element)=>{
+      this.patients.forEach((element) => {
         if (element.divisionId == null) this.unassignedPatients.push(element);
       })
       if (!(this.unassignedPatients.length == 0)){
@@ -145,11 +143,10 @@ export class AdmitPatientComponent implements OnInit {
       else{
         this.noUnassignedPatients = true;
       }
-    })
+    });
 
-    this.divisionService.getDivisions().subscribe(data => {
+    this.divisionFacade.getDivisions().subscribe(data => {
       this.divisions = data.map(e => {
-        //console.log(e.payload);
         return {
           id: e.payload.doc.id,
           ...(e.payload.doc.data() as object)
@@ -160,8 +157,8 @@ export class AdmitPatientComponent implements OnInit {
       this.divisionPatients = [];
       this.divisions.find(o => o.id === this.currentDivisionRE).patients.forEach((element)=>{
         this.divisionPatients.push(this.patients.find(x => x.id === element));
-      })
-      if (!(this.divisionPatients.length == 0)){
+      });
+      if (!(this.divisionPatients.length === 0)){
         this.noPatients = false;
         this.currentPatientRE = this.divisionPatients[0].id;
       }
@@ -169,8 +166,9 @@ export class AdmitPatientComponent implements OnInit {
         this.noPatients = true;
       }
 
-      this.capacity = (this.divisions.find(o => o.id === this.currentDivision).totalCapacity == this.divisions.find(o => o.id === this.currentDivision).currentCapacity) ? true : false;
-    })
+      this.capacity = (this.divisions.find(o => o.id === this.currentDivision).totalCapacity === this.divisions.find
+      (o => o.id === this.currentDivision).currentCapacity) ? true : false;
+    });
 
-  };
+  }
 }

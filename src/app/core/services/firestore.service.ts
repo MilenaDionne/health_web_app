@@ -42,8 +42,6 @@ export class FirestoreService {
   }
 
   addPrescription(patientFile: PatientFile): void{
-    console.log("patientFilesfsf");
-    console.log(patientFile);
     this.firestore.collection('patients').doc(patientFile.id).update(patientFile).then(r => {
       alert('file updated successfully!');
     }).catch(error => {
@@ -67,5 +65,19 @@ export class FirestoreService {
 
   getDivision(docId: string): Observable<unknown>{
     return this.firestore.collection('divisions').doc(docId).valueChanges();
+  }
+
+  getDivisionCapacity(docId: string): string{
+    let capacity = '';
+    this.firestore.collection("divisions").doc(docId).get().toPromise().then((doc) => {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        capacity = "sfsf";
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    });
+    return capacity;
   }
 }
