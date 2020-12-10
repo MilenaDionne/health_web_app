@@ -43,7 +43,6 @@ const routes: Routes = [
     path: 'divisions',
     loadChildren: () => import('./views/division/division.module').then(m => m.DivisionModule),
     ...canActivate(redirectUnauthorizedToLogin),
-    canActivate: [ChargeNurseGuardGuard]
   },
   {
       path: 'consultPatient',
