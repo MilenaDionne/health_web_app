@@ -24,30 +24,6 @@ export class HeaderComponent implements OnInit {
   role = '';
 
 
-  public sideNavButtonsNurse: SideNavButton[] = [
-    { label: 'home', path: '', guards: ['chargeNurse'] },
-    { label: 'profile', path: 'profile', guards: ['doctor'] },
-    { label: 'register Patient', path: 'registerPatient', guards: ['chargeNurse'] },
-    { label: 'consult Patient', path: 'consultPatient', guards: ['chargeNurse'] }
-  ];
-
-  public sideNavButtonsDoctor: SideNavButton[] = [
-    { label: 'home', path: '', guards: ['chargeNurse'] },
-    { label: 'profile', path: 'profile', guards: ['doctor'] },
-    { label: 'register Patient', path: 'registerPatient', guards: ['chargeNurse'] },
-    { label: 'consult Patient', path: 'consultPatient', guards: ['chargeNurse'] },
-    { label: 'prescription', path: 'prescription', guards: ['doctor']}
-  ];
-
-  public sideNavButtonsChargeNurse: SideNavButton[] = [
-    { label: 'home', path: '', guards: ['chargeNurse'] },
-    { label: 'profile', path: 'profile', guards: ['doctor'] },
-    { label: 'register Patient', path: 'registerPatient', guards: ['chargeNurse'] },
-    { label: 'admit Patient', path: 'admitPatient', guards: ['chargeNurse'] },
-    { label: 'consult Patient', path: 'consultPatient', guards: ['chargeNurse'] },
-    { label: 'divisions', path: 'divisions', guards: ['chargeNurse']}
-  ];
-
   public sideNavButtons: SideNavButton[] = [
     { label: 'home', path: '', guards: ['chargeNurse'] },
     { label: 'profile', path: 'profile', guards: ['doctor'] },
@@ -57,7 +33,6 @@ export class HeaderComponent implements OnInit {
     { label: 'divisions', path: 'divisions', guards: ['chargeNurse']},
     { label: 'prescription', path: 'prescription', guards: ['doctor']}
   ];
-
 
   constructor(public authService: AuthService) {
     this.user = authService.getUser;
@@ -80,8 +55,9 @@ export class HeaderComponent implements OnInit {
     this.logout.emit();
   }
 
-  public getSideNavButtons(): SideNavButton[] {
-    const data: SideNavButton[] = [];
+  public getSideNavButtons(): SideNavButton[]
+  {
+    let data: SideNavButton[] =[];
     for ( const button of this.sideNavButtons){
       const guards = button.guards;
       for ( const guard of guards){

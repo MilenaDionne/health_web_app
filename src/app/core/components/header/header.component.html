@@ -1,27 +1,19 @@
 <mat-toolbar class="header-container" color="primary">
     <mat-toolbar-row>
       <span>PMS</span>
-      <ng-container *ngIf="role == 'Doctor'">
-        <div *ngFor="let nav of sideNavButtonsDoctor" >
-          <a class="menu-button" (click)="onNavigateOut()" [routerLink]="['/' + nav.path]">
-            {{ nav.label | titlecase }}
-          </a>
-        </div>
+
+      <ng-container *ngFor="let nav of sideNavButtons" >
+        <a
+          class="menu-button"
+
+          *ngIf=" true"
+          (click)="onNavigateOut()"
+          [routerLink]="['/' + nav.path]">
+          {{ nav.label | titlecase }}
+        </a>
       </ng-container>
-      <ng-container *ngIf="role == 'Nurse'">
-        <div *ngFor="let nav of sideNavButtonsNurse" >
-          <a class="menu-button" (click)="onNavigateOut()" [routerLink]="['/' + nav.path]">
-            {{ nav.label | titlecase }}
-          </a>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="role == 'ChargeNurse'">
-        <div *ngFor="let nav of sideNavButtonsChargeNurse" >
-          <a class="menu-button" (click)="onNavigateOut()" [routerLink]="['/' + nav.path]">
-            {{ nav.label | titlecase }}
-          </a>
-        </div>
-      </ng-container>
+
+
       <span class="space"></span>
       <button mat-raised-button (click)="onLogout()" color="warn"> Logout <mat-icon>power_settings_new</mat-icon> </button>
     </mat-toolbar-row>
