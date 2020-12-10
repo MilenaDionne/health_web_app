@@ -56,7 +56,7 @@
         </mat-form-field>
     </div>
     <div *ngIf="this.noPatients" class="alert-msg">
-        <p>Note: There are currently no unassigned patients.</p>
+        <p>Note: There are currently no assigned patients to this division.</p>
     </div>
     <button (click)="removeButton()" [disabled]="this.noPatients">Request Removal</button>
 </div>
